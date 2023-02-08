@@ -1,0 +1,1996 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Imtihon Meros App",
+        "description": "This is Meros App for Exam",
+        "version": "1.2.0"
+    },
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "User Login",
+                "description": "Code will be sent to email after User Login",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "email": "example@gmail.com",
+                                    "password": "12345678"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Code send Mail",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login/email": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Rout to enter the code sent to the email",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "description": "Rout to enter the code sent to the email",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "emailCode": {
+                                        "type": "number"
+                                    }
+                                },
+                                "example": {
+                                    "emailCode": 12345
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "bearer_token": {
+                                            "type": "string"
+                                        },
+                                        "refresh_token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/registr": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Registr User",
+                "description": "Code will be sent to email after User Registratsiya",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "rasm": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Code send Mail",
+                                            "description": "Code send Email"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/registr/email": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Rout to enter the code sent to the email",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "description": "Rout to enter the code sent to the email",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "emailCode": {
+                                        "type": "number"
+                                    }
+                                },
+                                "example": {
+                                    "emailCode": 12345
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "bearer_token": {
+                                            "type": "string"
+                                        },
+                                        "refresh_token": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/category": {
+            "get": {
+                "tags": ["Category"],
+                "summary": "View a new Category",
+                "description": "With this api you can view Category",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view Category",
+                                            "default": [
+                                                {
+                                                    "cat_id": "1120f438-9713-4cab-830e-0bbf97fa3446",
+                                                    "cat_title": "OK"
+                                                },
+                                                {
+                                                    "cat_id": "4fbd4292-21f1-48e8-aa23-6c49046a2664",
+                                                    "cat_title": "OK"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/category/create": {
+            "post": {
+                "tags": ["Category"],
+                "summary": "create Category",
+                "description": "With this api you can create Category",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "title": "Kiyimlar"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Create",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "201",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "cat_id": "1120f438-9713-4cab-830e-0bbf97fa3446",
+                                                "cat_title": "Kiyimlar"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/category/update/{Category_id}": {
+            "put": {
+                "tags": ["Category"],
+                "summary": "update Category",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "Category_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "description": "With this api you can update Category",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "title": "admin"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Update",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "cat_id": "1120f438-9713-4cab-830e-0bbf97fa3446",
+                                                "cat_title": "Kiyimlar"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/category/delete/{Category_id}": {
+            "delete": {
+                "tags": ["Category"],
+                "summary": "Delete Category",
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "Category_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "description": "With this api you can delete Category",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Delete",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "204",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "cat_id": "1120f438-9713-4cab-830e-0bbf97fa3446",
+                                                "cat_title": "Kiyimlar"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/category/{Category_id}": {
+            "get": {
+                "tags": ["Category"],
+                "summary": "Create a new Category",
+                "description": "With this api you can view Category",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "Category_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view Category",
+                                            "default": [
+                                                {
+                                                    "cat_id": "4e0c4333-e451-4a41-83ab-9cc97ae908d7",
+                                                    "cat_title": "Kiyimlar",
+                                                    "cat_sub": []
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subCategory": {
+            "get": {
+                "tags": ["subCategory"],
+                "summary": "View a new subCategory",
+                "description": "With this api you can view subCategory",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view subCategory",
+                                            "default": [
+                                                {
+                                                    "sub_id": "1120f438-9713-4cab-830e-0bbf97fa3446",
+                                                    "sub_title": "OK"
+                                                },
+                                                {
+                                                    "sub_id": "4fbd4292-21f1-48e8-aa23-6c49046a2664",
+                                                    "sub_title": "OK"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subCategory/create": {
+            "post": {
+                "tags": ["subCategory"],
+                "summary": "create subCategory",
+                "description": "With this api you can create subCategory",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "categoryId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "title": "Kiyimlar",
+                                    "categoryId": "1120f438-9713-4cab-830e-0bbf97fa3446"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Create",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "201",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "sub_id": "d6fb51de-6adc-4d6c-ba3e-97f2ea9647fb",
+                                                "createDate": "2023-02-08T00:20:25.795Z",
+                                                "updateDate": "2023-02-08T00:20:25.795Z",
+                                                "sub_title": "Kiyimlar",
+                                                "subCatCatId": "4e0c4333-e451-4a41-83ab-9cc97ae908d7"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subCategory/update/{subCategory_id}": {
+            "put": {
+                "tags": ["subCategory"],
+                "summary": "update subCategory",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "subCategory_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "description": "With this api you can update subCategory",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "categoryId": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "title": "admin",
+                                    "categoryId": "1120f438-9713-4cab-830e-0bbf97fa3446"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Update",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "sub_id": "0c48bcc9-59d4-4df3-be2c-0e64ff77d83b",
+                                                "createDate": "2023-02-07T14:17:27.243Z",
+                                                "updateDate": "2023-02-08T00:21:57.185Z",
+                                                "sub_title": "admin",
+                                                "subCatCatId": "d970a5ed-96af-4729-b381-665198234382"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subCategory/delete/{subCategory_id}": {
+            "delete": {
+                "tags": ["subCategory"],
+                "summary": "Delete subCategory",
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "subCategory_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "description": "With this api you can delete subCategory",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Delete",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "204",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "sub_id": "0c48bcc9-59d4-4df3-be2c-0e64ff77d83b",
+                                                "createDate": "2023-02-07T14:17:27.243Z",
+                                                "updateDate": "2023-02-08T00:21:57.185Z",
+                                                "sub_title": "admin",
+                                                "subCatCatId": "d970a5ed-96af-4729-b381-665198234382"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/subCategory/{subCategory_id}": {
+            "get": {
+                "tags": ["subCategory"],
+                "summary": "Create a new subCategory",
+                "description": "With this api you can view subCategory",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "subCategory_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view subCategory",
+                                            "default": [
+                                                {
+                                                    "sub_id": "d6fb51de-6adc-4d6c-ba3e-97f2ea9647fb",
+                                                    "sub_title": "Kiyimlar",
+                                                    "sub_product": []
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product": {
+            "get": {
+                "tags": ["Product"],
+                "summary": "View a new product",
+                "description": "With this api you can view Product",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view Product",
+                                            "default": [
+                                                {
+                                                    "pro_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                    "pro_name": "Cola",
+                                                    "pro_price": 10000,
+                                                    "pro_img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                    "pro_img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                    "pro_razmer": null,
+                                                    "pro_pol": true,
+                                                    "pro_after": null,
+                                                    "pro_in": null,
+                                                    "pro_langu": null
+                                                },
+                                                {
+                                                    "pro_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                    "pro_name": "Cola",
+                                                    "pro_price": 10000,
+                                                    "pro_img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                    "pro_img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                    "pro_razmer": null,
+                                                    "pro_pol": true,
+                                                    "pro_after": null,
+                                                    "pro_in": null,
+                                                    "pro_langu": null
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product/create": {
+            "post": {
+                "tags": ["Product"],
+                "summary": "create Product",
+                "description": "With this api you can create Product",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "razmer": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "after": {
+                                        "type": "string"
+                                    },
+                                    "madeIn": {
+                                        "type": "string"
+                                    },
+                                    "language": {
+                                        "type": "string"
+                                    },
+                                    "subId": {
+                                        "type": "string"
+                                    },
+                                    "rasmlar": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "required": ["name", "price", "gender", "subId", "rasmlar"],
+                                "example": {
+                                    "name": "Sumka",
+                                    "price": 10,
+                                    "razmer": null,
+                                    "gender": "Erkaklar uchun",
+                                    "after": null,
+                                    "madeIn": "China",
+                                    "language": null,
+                                    "subId": "uuid"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Create",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "201",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "pro_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                "pro_name": "Cola",
+                                                "pro_price": 10000,
+                                                "pro_img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                "pro_img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                "pro_razmer": null,
+                                                "pro_pol": true,
+                                                "pro_after": null,
+                                                "pro_in": null,
+                                                "pro_langu": null
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product/update/{Product_id}": {
+            "put": {
+                "tags": ["Product"],
+                "summary": "update Product",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "Product_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "description": "With this api you can update Product",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "number"
+                                    },
+                                    "razmer": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string"
+                                    },
+                                    "after": {
+                                        "type": "string"
+                                    },
+                                    "madeIn": {
+                                        "type": "string"
+                                    },
+                                    "language": {
+                                        "type": "string"
+                                    },
+                                    "subId": {
+                                        "type": "string"
+                                    },
+                                    "rasmlar": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "name": "Sumka",
+                                    "price": 10,
+                                    "razmer": null,
+                                    "gender": "Erkaklar uchun",
+                                    "after": null,
+                                    "madeIn": "China",
+                                    "language": null,
+                                    "subId": "uuid"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Update",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "pro_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                "pro_name": "Cola",
+                                                "pro_price": 10000,
+                                                "pro_img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                "pro_img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                "pro_razmer": null,
+                                                "pro_pol": true,
+                                                "pro_after": null,
+                                                "pro_in": null,
+                                                "pro_langu": null
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product/delete/{Product_id}": {
+            "delete": {
+                "tags": ["Product"],
+                "summary": "Delete Product",
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "Product_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "description": "With this api you can delete Product",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Delete",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "204",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "pro_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                "pro_name": "Cola",
+                                                "pro_price": 10000,
+                                                "pro_img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                "pro_img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                "pro_razmer": null,
+                                                "pro_pol": true,
+                                                "pro_after": null,
+                                                "pro_in": null,
+                                                "pro_langu": null
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/product/search/{Search_title}": {
+            "get": {
+                "tags": ["Product"],
+                "summary": "Search by Product",
+                "description": "With this api you can view Product",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "Search_title",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": [
+                                                {
+                                                    "pro_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                    "pro_name": "Cola",
+                                                    "pro_price": 10000,
+                                                    "pro_img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                    "pro_img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                    "pro_razmer": null,
+                                                    "pro_pol": true,
+                                                    "pro_after": null,
+                                                    "pro_in": null,
+                                                    "pro_langu": null
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/comment": {
+            "get": {
+                "tags": ["comment"],
+                "summary": "View a new comment",
+                "description": "With this api you can view comment",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view Comment",
+                                            "default": [
+                                                {
+                                                    "comment_id": "56cc845e-e570-4c19-81e7-e08350c442d2",
+                                                    "comment": "Ok"
+                                                },
+                                                {
+                                                    "comment_id": "56cc845e-e570-4c19-81e7-e08350c442d2",
+                                                    "comment": "Ok"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/comment/create": {
+            "post": {
+                "tags": ["comment"],
+                "summary": "create comment",
+                "description": "With this api you can create comment",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "productId": {
+                                        "type": "string"
+                                    },
+                                    "comment": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Create",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "201",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "comment_id": "56cc845e-e570-4c19-81e7-e08350c442d2",
+                                                "comment": "Ok"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/comment/update/{comment_id}": {
+            "put": {
+                "tags": ["comment"],
+                "summary": "update comment",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "comment_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "description": "With this api you can update comment",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "comment": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Update",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "comment_id": "56cc845e-e570-4c19-81e7-e08350c442d2",
+                                                "comment": "Ok"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/comment/delete/{comment_id}": {
+            "delete": {
+                "tags": ["comment"],
+                "summary": "Delete comment",
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "comment_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "description": "With this api you can delete comment",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Delete",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "204",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "comment_id": "56cc845e-e570-4c19-81e7-e08350c442d2",
+                                                "comment": "Ok"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/comment/{Product_id}": {
+            "get": {
+                "tags": ["comment"],
+                "summary": "Comments on the product",
+                "description": "With this api you can view Comment with Product",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "Product_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": [
+                                                {
+                                                    "pro_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                    "pro_name": "Cola",
+                                                    "pro_price": 10000,
+                                                    "pro_img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                    "pro_img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                    "pro_razmer": null,
+                                                    "pro_pol": true,
+                                                    "pro_after": null,
+                                                    "pro_in": null,
+                                                    "pro_langu": null,
+                                                    "pro_comment": [
+                                                        {
+                                                            "comment_id": "56cc845e-e570-4c19-81e7-e08350c442d2",
+                                                            "comment": "Ok"
+                                                        },
+                                                        {
+                                                            "comment_id": "a3f583e8-c2ae-4f38-9333-50f6e54279ad",
+                                                            "comment": "Ok"
+                                                        },
+                                                        {
+                                                            "comment_id": "1e6d68f4-5e4c-438d-8be8-cb3be802d487",
+                                                            "comment": "Ok"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/karzinka": {
+            "get": {
+                "tags": ["karzinka"],
+                "summary": "View a new karzinka",
+                "description": "With this api you can view karzinka",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "description": "view karzinka",
+                                            "default": {
+                                                "user_id": "a6b67614-81ed-4fb5-9e6e-47ce9a36e235",
+                                                "user_name": "Akmaljon",
+                                                "user_img": "bf9bed7b-5ddb-456b-a9bf-26d8edc0c16b.jpg",
+                                                "user_phone": "99890823032",
+                                                "user_email": "ahmadjonovakmal079@gmail.com",
+                                                "user_pol": true,
+                                                "user_karzinka": [
+                                                    {
+                                                        "karzinka_id": "7a51da72-3474-49cf-b495-c1fe356cbbd9",
+                                                        "karzinka_pro": {
+                                                            "pro_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                            "pro_name": "Cola",
+                                                            "pro_price": 10000,
+                                                            "pro_img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                            "pro_img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                            "pro_razmer": null,
+                                                            "pro_pol": true,
+                                                            "pro_after": null,
+                                                            "pro_in": null,
+                                                            "pro_langu": null
+                                                        }
+                                                    },
+                                                    {
+                                                        "karzinka_id": "ff97a275-4056-4183-8b03-2226b7b720c8",
+                                                        "karzinka_pro": {
+                                                            "pro_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                            "pro_name": "Cola",
+                                                            "pro_price": 10000,
+                                                            "pro_img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                            "pro_img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                            "pro_razmer": null,
+                                                            "pro_pol": true,
+                                                            "pro_after": null,
+                                                            "pro_in": null,
+                                                            "pro_langu": null
+                                                        }
+                                                    },
+                                                    {
+                                                        "karzinka_id": "ff1f6920-f895-44a4-ae5d-bf51c6be1853",
+                                                        "karzinka_pro": {
+                                                            "pro_id": "39bb56b1-370d-44e4-a5af-6fd2c69b7289",
+                                                            "pro_name": "Cola",
+                                                            "pro_price": 10000,
+                                                            "pro_img1": "340d793e-7288-4e57-96d5-3bc75b3e0151.jpg",
+                                                            "pro_img2": "d596bbda-8cdc-4bdb-8a00-78757cf2b941.jpg",
+                                                            "pro_razmer": null,
+                                                            "pro_pol": true,
+                                                            "pro_after": null,
+                                                            "pro_in": null,
+                                                            "pro_langu": null
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/karzinka/create": {
+            "post": {
+                "tags": ["karzinka"],
+                "summary": "create karzinka",
+                "description": "With this api you can create karzinka",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "productId": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Create",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "201",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "karzinka_id": "bb60c0e9-e76b-4fc7-a1bd-98c808172b91",
+                                                "createDate": "2023-02-08T00:58:20.091Z",
+                                                "updateDate": "2023-02-08T00:58:20.091Z",
+                                                "karzinkaProProId": "557d94f4-f5d1-4ec1-b6e1-0af2b08446f0",
+                                                "karzinkaUserUserId": "a6b67614-81ed-4fb5-9e6e-47ce9a36e235"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/karzinka/delete/{karzinka_id}": {
+            "delete": {
+                "tags": ["karzinka"],
+                "summary": "Delete karzinka",
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "karzinka_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "description": "With this api you can delete karzinka",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "Delete",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "204",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": {
+                                                "karzinka_id": "bb60c0e9-e76b-4fc7-a1bd-98c808172b91",
+                                                "createDate": "2023-02-08T00:58:20.091Z",
+                                                "updateDate": "2023-02-08T00:58:20.091Z",
+                                                "karzinkaProProId": "557d94f4-f5d1-4ec1-b6e1-0af2b08446f0",
+                                                "karzinkaUserUserId": "a6b67614-81ed-4fb5-9e6e-47ce9a36e235"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/karzinka/{Product_id}": {
+            "get": {
+                "tags": ["karzinka"],
+                "summary": "karzinka on the product",
+                "description": "With this api you can view karzinka with Product",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "acces_token",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "Product_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json:": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "default": "OK",
+                                            "description": "Message of the response"
+                                        },
+                                        "status": {
+                                            "type": "integer",
+                                            "format": "int64",
+                                            "default": "200",
+                                            "description": "Status of the response"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "default": [
+                                                {
+                                                    "pro_id": "557d94f4-f5d1-4ec1-b6e1-0af2b08446f0",
+                                                    "pro_name": "Cola",
+                                                    "pro_price": 10000,
+                                                    "pro_img1": "e430abc2-0137-4c0b-992c-5f0276acd49f.jpg",
+                                                    "pro_img2": "6efcf5ce-07cc-4840-aafe-0af51b2b45e2.jpg",
+                                                    "pro_razmer": null,
+                                                    "pro_pol": true,
+                                                    "pro_after": null,
+                                                    "pro_in": null,
+                                                    "pro_langu": null,
+                                                    "pro_karzinka": [
+                                                        {
+                                                            "karzinka_id": "bb60c0e9-e76b-4fc7-a1bd-98c808172b91"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
